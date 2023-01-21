@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>org.sta.supertux-advance</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>AGPL-3.0-only</project_license>
+	<name>SuperTux Advance</name>
+	<developer_name>SuperTux Advance Team</developer_name>
+	<summary>A SuperTux fangame aiming to be a fast-paced action platformer</summary>
+	<categories>
+		<category>Game</category>
+	</categories>
+	<description>
+		<p>SuperTux Advance is a fan game of <a href="https://supertux.org">SuperTux</a> written in Squirrel using <a href="https://github.com/KelvinShadewing/brux-gdk">Brux GDK</a>.
+		The name comes from the graphical style, which uses a lower resolution display and a sprite style similar to Sonic Advance.
+		Gameplay is not a 1 to 1 recreation of SuperTux, nor does it aim to be. It’s meant to be a more fast-paced action platformer than a Mario clone. While the gameplay is designed with speedrunning in mind, it is not an essential skill; the game can be played and beaten casually.</p>
+	</description>
+	<launchable type="desktop-id">org.sta.supertux-advance.desktop</launchable>
+	<provides>
+		<binary>SuperTux Advance</binary>
+	</provides>
+	<url type="homepage">https://supertuxadvance.github.io</url>
+	<url type="bugtracker">https://github.com/KelvinShadewing/supertux-advance/issues</url>
+	<url type="donation">https://ko-fi.com/KelvinShadewing</url>
+	<screenshots>
+		<screenshot type="default">
+			<caption>Fort Borealis, the last level of the Aurora Isles</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/6.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Title screen</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/1.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Dialogue box</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/2.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Tux sliding into snowballs</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/3.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Tux on the World Map (Aurora Isles)</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/4.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Tux swimming</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/5.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Tux relaxing at a cafe</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/7.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Katie (KDE) with an Air Flower on a beach</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/fl-3.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Katie (KDE) with a Fire Flower jumping over spikes</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/fl-2.png</image>
+		</screenshot>
+	</screenshots>
+	<releases>
+		<release version="0.2.0" date="2022-10-28"/>
+		<release version="0.1.0" date="2022-04-09"/>
+	</releases>
+	<content_rating type="oars-1.1"/> <!-- To generate this, go to https://hughsie.github.io/oars/generate.html -->
+	<supports>
+		<control>keyboard</control>
+		<control>gamepad</control>
+		<control>pointing</control>
+	</supports>
+	<recommends>
+		<control>keyboard</control>
+		<control>gamepad</control>
+		<memory>1024</memory> <!-- 1 GiB of memory recommended -->
+	</recommends>
+</component>

@@ -1,0 +1,13 @@
+{
+  "name": "SDL2_net",
+  "buildsystem": "autotools",
+  "config-opts": ["--disable-static"],
+  "sources": [
+    {
+      "type": "archive",
+      "url": "https://github.com/libsdl-org/SDL_net/releases/download/release-2.2.0/SDL2_net-2.2.0.tar.gz",
+      "sha256": "4e4a891988316271974ff4e9585ed1ef729a123d22c08bd473129179dc857feb"
+    }
+  ],
+  "cleanup": ["/lib/libSDL2_net.la", "/include/SDL_net.h"]
+}

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Categories=Game;
+MimeType=
+Name=SuperTux Advance
+Type=Application
+Exec=runner.sh
