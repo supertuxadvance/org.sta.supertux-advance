@@ -17,9 +17,11 @@ modules:
     build-commands:
       - install -D brux /app/bin/brux
       - install -D runner.sh /app/bin/runner.sh
-      - mv sta /app/bin/
+      - mv sta /app/bin/ && rm -r /app/bin/sta/contrib/azzy
+      - echo $PWD
       - install -D $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml
       - install -D $FLATPAK_ID.desktop /app/share/applications/$FLATPAK_ID.desktop
+      - cd /app/bin/sta && git apply /run/build/supertux-advance/0.2.0-IO.diff
     no-autogen: true
     sources:
       - type: archive
@@ -35,6 +37,8 @@ modules:
         path: org.sta.supertux-advance.desktop
       - type: file
         path: runner.sh
+      - type: file
+        path: patches/0.2.0-IO.diff
   - modules/SDL2.json
   - modules/SDL2_gfx.json
   - modules/SDL2_image.json

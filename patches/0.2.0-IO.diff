@@ -1,0 +1,268 @@
+diff --git a/game.brx b/game.brx
+index 40a0cd4..3c6857c 100644
+--- a/game.brx
++++ b/game.brx
+@@ -60,7 +60,7 @@ donut("src/racer.nut")
+ //    MAIN    //
+ ////////////////
+ 
+-if(fileExists("config.json")) config = mergeTable(config, jsonRead(fileRead("config.json")))
++if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json")) config = mergeTable(config, jsonRead(fileRead(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json")))
+ 
+ //Set volume
+ setSoundVolume(config.soundVolume)
+@@ -127,7 +127,7 @@ setFPS(60)
+ gvLangObj = jsonRead(fileRead("lang/en.json"))
+ gvLangObj = mergeTable(gvLangObj, jsonRead(fileRead("lang/" + config.lang + ".json")))
+ 
+-if(fileExists("save/_achievements.json")) gvUnlockedAchievements = jsonRead(fileRead("save/_achievements.json"))
++if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/_achievements.json")) gvUnlockedAchievements = jsonRead(fileRead(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/_achievements.json"))
+ 
+ //Set difficulty strings
+ strDifficulty = [
+@@ -138,8 +138,8 @@ strDifficulty = [
+ ]
+ 
+ //Load mods
+-local modlist = lsdir("mods")
+-for(local i = 0; i < modlist.len(); i++) if(modlist[i] != "." && modlist[i] != "..") donut("mods/" + modlist[i])
++local modlist = lsdir(getenv("HOME") + "/.var/app/org.sta.supertux-advance/mods")
++for(local i = 0; i < modlist.len(); i++) if(modlist[i] != "." && modlist[i] != "..") donut(getenv("HOME") + "/.var/app/org.sta.supertux-advance/mods/" + modlist[i])
+ 
+ print("Launching SuperTux Advance v." + gvVersion + "...")
+ startMain()
+diff --git a/src/achievements.nut b/src/achievements.nut
+index 645aca6..92bc791 100644
+--- a/src/achievements.nut
++++ b/src/achievements.nut
+@@ -89,7 +89,7 @@
+ 			gvUnlockedAchievements[key] <- true
+ 			newActor(AchiNotice, 16, -16, key)
+ 			popSound(sndAchievement, 0)
+-			fileWrite("save/_achievements.json", jsonWrite(gvUnlockedAchievements))
++			fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/_achievements.json", jsonWrite(gvUnlockedAchievements))
+ 			gvAchievementTimer = 120
+ 			break
+ 		}
+@@ -163,4 +163,4 @@
+ 
+ ::drawAchievements <- function() {
+ 	if(actor.rawin("AchiNotice")) foreach(i in actor["AchiNotice"]) i.run(true)
+-}
+\ No newline at end of file
++}
+diff --git a/src/contriblevels.nut b/src/contriblevels.nut
+index bafcb60..b41eee6 100644
+--- a/src/contriblevels.nut
++++ b/src/contriblevels.nut
+@@ -40,7 +40,7 @@
+ 								donut("contrib/" + contribFolder + "/script.nut")
+ 								contribDidRun[contribFolder] <- true
+ 							}
+-							if(fileExists("save/" + contribFolder + ".json")) loadGame(contribFolder)
++							if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/" + contribFolder + ".json")) loadGame(contribFolder)
+ 							else startOverworld("contrib/" + contribFolder + "/" + contribWorldmap)
+ 						}
+ 						desc = function() {
+@@ -77,8 +77,8 @@
+ 							}
+ 
+ 							//Get completed levels count
+-							if(fileExists("save/" + contribFolder + ".json")) {
+-								local contribWorldmapSaveData = jsonRead(fileRead("save/" + contribFolder + ".json"))
++							if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/" + contribFolder + ".json")) {
++								local contribWorldmapSaveData = jsonRead(fileRead(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/" + contribFolder + ".json"))
+ 								foreach(level, levelCompleted in contribWorldmapSaveData["completed"]) {
+ 									if(levelCompleted && levels.find(level) != null) completedLevelsCount++
+ 								}
+diff --git a/src/controls.nut b/src/controls.nut
+index 4a85573..6339579 100644
+--- a/src/controls.nut
++++ b/src/controls.nut
+@@ -275,7 +275,7 @@
+ 		update()
+ 	}
+ 
+-	fileWrite("config.json", jsonWrite(config))
++	fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config))
+ }
+ 
+ ::rebindGamepad <- function(joystep) {
+@@ -423,7 +423,7 @@
+ 		update()
+ 	}
+ 
+-	fileWrite("config.json", jsonWrite(config))
++	fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config))
+ }
+ 
+ ::rebindJoyPeek <- function(axis) {
+@@ -455,5 +455,5 @@
+ 		update()
+ 	}
+ 
+-	fileWrite("config.json", jsonWrite(config))
+-}
+\ No newline at end of file
++	fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config))
++}
+diff --git a/src/menus.nut b/src/menus.nut
+index f9a3cd1..82843c5 100644
+--- a/src/menus.nut
++++ b/src/menus.nut
+@@ -290,7 +290,7 @@ const menuY = 40
+ 			return msg
+ 		},
+ 		desc = function() { return gvLangObj["options-menu-desc"]["cursor"] },
+-		func = function() { config.showcursor = !config.showcursor; fileWrite("config.json", jsonWrite(config)) }
++		func = function() { config.showcursor = !config.showcursor; fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config)) }
+ 	},
+ 	{
+ 		name = function() { return gvLangObj["options-menu"]["language"] },
+@@ -310,7 +310,7 @@ const menuY = 40
+ 			return msg
+ 		},
+ 		desc = function() { return gvLangObj["options-menu-desc"]["light"] },
+-		func = function() { config.light = !config.light; fileWrite("config.json", jsonWrite(config)) }
++		func = function() { config.light = !config.light; fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config)) }
+ 	},
+ 	{
+ 		name = function() { return gvLangObj["options-menu"]["fullscreen"] },
+@@ -325,7 +325,7 @@ const menuY = 40
+ 			return msg
+ 		},
+ 		desc = function() { return gvLangObj["options-menu-desc"]["stickspeed"] },
+-		func = function() { config.stickspeed = !config.stickspeed; fileWrite("config.json", jsonWrite(config)) }
++		func = function() { config.stickspeed = !config.stickspeed; fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config)) }
+ 	},
+ 	{
+ 		name = function() {
+@@ -335,7 +335,7 @@ const menuY = 40
+ 			return msg
+ 		},
+ 		desc = function() { return gvLangObj["options-menu-desc"]["autorun"] },
+-		func = function() { config.autorun = !config.autorun; fileWrite("config.json", jsonWrite(config)) }
++		func = function() { config.autorun = !config.autorun; fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config)) }
+ 	},
+ 	{
+ 		name = function() {
+@@ -345,7 +345,7 @@ const menuY = 40
+ 			return msg
+ 		},
+ 		desc = function() { return gvLangObj["options-menu-desc"]["usefilter"] },
+-		func = function() { config.usefilter = !config.usefilter; fileWrite("config.json", jsonWrite(config)) }
++		func = function() { config.usefilter = !config.usefilter; fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config)) }
+ 	},
+ 	{
+ 		name = function() { return gvLangObj["options-menu"]["sound-volume"] },
+@@ -403,7 +403,7 @@ const menuY = 40
+ 				else menu = mePausePlay
+ 			}
+ 			else menu = meMain;
+-			fileWrite("config.json", jsonWrite(config))
++			fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config))
+ 		}
+ 		back = function() {
+ 			if(gvGameMode == gmPause) {
+@@ -411,7 +411,7 @@ const menuY = 40
+ 				else menu = mePausePlay
+ 			}
+ 			else menu = meMain;
+-			fileWrite("config.json", jsonWrite(config))
++			fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/config.json", jsonWrite(config))
+ 		}
+ 	}
+ 
+@@ -605,48 +605,48 @@ const menuY = 40
+ 	{
+ 		name = function() {
+ 			local m = "File 0"
+-			if(fileExists("save/0.json")) m += " " + gvLangObj["new-game-menu"]["file-exists"]
++			if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/0.json")) m += " " + gvLangObj["new-game-menu"]["file-exists"]
+ 			return m
+ 		},
+ 		func = function() {
+ 			game.file = 0
+-			if(fileExists("save/0.json")) menu = meOverwrite
++			if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/0.json")) menu = meOverwrite
+ 			else newGame(0)
+ 		}
+ 	},
+ 	{
+ 		name = function() {
+ 			local m = "File 1"
+-			if(fileExists("save/1.json")) m += " " + gvLangObj["new-game-menu"]["file-exists"]
++			if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/1.json")) m += " " + gvLangObj["new-game-menu"]["file-exists"]
+ 			return m
+ 		},
+ 		func = function() {
+ 			game.file = 1
+-			if(fileExists("save/1.json")) menu = meOverwrite
++			if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/1.json")) menu = meOverwrite
+ 			else newGame(1)
+ 		}
+ 	},
+ 	{
+ 		name = function() {
+ 			local m = "File 2"
+-			if(fileExists("save/2.json")) m += " " + gvLangObj["new-game-menu"]["file-exists"]
++			if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/2.json")) m += " " + gvLangObj["new-game-menu"]["file-exists"]
+ 			return m
+ 		},
+ 		func = function() {
+ 			game.file = 2
+-			if(fileExists("save/2.json")) menu = meOverwrite
++			if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/2.json")) menu = meOverwrite
+ 			else newGame(2)
+ 		}
+ 	},
+ 	{
+ 		name = function() {
+ 			local m = "File 3"
+-			if(fileExists("save/3.json")) m += " " + gvLangObj["new-game-menu"]["file-exists"]
++			if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/3.json")) m += " " + gvLangObj["new-game-menu"]["file-exists"]
+ 			return m
+ 		},
+ 		func = function() {
+ 			game.file = 3
+-			if(fileExists("save/3.json")) menu = meOverwrite
++			if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/3.json")) menu = meOverwrite
+ 			else newGame(3)
+ 		}
+ 	},
+diff --git a/src/save.nut b/src/save.nut
+index a502cbf..2d15bf6 100644
+--- a/src/save.nut
++++ b/src/save.nut
+@@ -24,12 +24,12 @@
+ }
+ 
+ ::saveGame <- function() {
+-	if(game.file != -1) fileWrite("save/" + game.file.tostring() + ".json", jsonWrite(game))
++	if(game.file != -1) fileWrite(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/" + game.file.tostring() + ".json", jsonWrite(game))
+ }
+ 
+ ::loadGame <- function(f) {
+-	if(fileExists("save/" + f.tostring() + ".json")) {
+-		game = mergeTable(createNewGameObject(), jsonRead(fileRead("save/" + f.tostring() + ".json")))
++	if(fileExists(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/" + f.tostring() + ".json")) {
++		game = mergeTable(createNewGameObject(), jsonRead(fileRead(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save/" + f.tostring() + ".json")))
+ 		//Sanitize removed characters
+ 		local foundMissing = true
+ 		while(foundMissing) {
+@@ -48,7 +48,7 @@
+ ::selectLoadGame <- function() {
+ 	local hasSaveFiles = false
+ 	meLoadGame = []
+-	local dir = lsdir("save")
++	local dir = lsdir(getenv("HOME") + "/.var/app/org.sta.supertux-advance/save")
+ 	dir.sort()
+ 
+ 	for(local i = 0; i < dir.len(); i++) {
+@@ -78,4 +78,4 @@
+ 	})
+ 
+ 	menu = meLoadGame
+-}
+\ No newline at end of file
++}
