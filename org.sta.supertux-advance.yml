@@ -21,6 +21,7 @@ modules:
       - echo $PWD
       - install -D $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml
       - install -D $FLATPAK_ID.desktop /app/share/applications/$FLATPAK_ID.desktop
+      - install -D $FLATPAK_ID.svg /app/share/icons/hicolor/scalable/apps/$FLATPAK_ID.svg
       - cd /app/bin/sta && git apply /run/build/supertux-advance/0.2.0-IO.diff
     no-autogen: true
     sources:
@@ -35,6 +36,8 @@ modules:
         path: org.sta.supertux-advance.appdata.xml
       - type: file
         path: org.sta.supertux-advance.desktop
+      - type: file
+        path: org.sta.supertux-advance.svg
       - type: file
         path: runner.sh
       - type: file

@@ -4,3 +4,4 @@ MimeType=
 Name=SuperTux Advance
 Type=Application
 Exec=runner.sh
+Icon=org.sta.supertux-advance

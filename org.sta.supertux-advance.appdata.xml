@@ -63,7 +63,10 @@
 		<release version="0.2.0" date="2022-10-28"/>
 		<release version="0.1.0" date="2022-04-09"/>
 	</releases>
-	<content_rating type="oars-1.1"/> <!-- To generate this, go to https://hughsie.github.io/oars/generate.html -->
+	<content_rating type="oars-1.1">
+		<content_attribute id="violence-cartoon">mild</content_attribute>
+		<content_attribute id="money-purchasing">mild</content_attribute>
+	</content_rating>
 	<supports>
 		<control>keyboard</control>
 		<control>gamepad</control>
