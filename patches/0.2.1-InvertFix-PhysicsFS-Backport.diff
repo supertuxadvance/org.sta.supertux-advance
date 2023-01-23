@@ -1,0 +1,22 @@
+diff --git a/game.brx b/game.brx
+index a55ffef..473af3d 100644
+--- a/game.brx
++++ b/game.brx
+@@ -10,6 +10,8 @@
+ |                                 |
+ \*===============================*/
+ 
++setWriteDir(getPrefDir("sta", "supertux-advance"))
++
+ //Game source
+ donut("src/util.nut")
+ donut("src/text.nut")
+@@ -111,7 +113,7 @@ bgPause = newTexture(screenW(), screenH())
+ setScalingFilter(0)
+ gvPlayScreen = newTexture(screenW(), screenH())
+ gvLightScreen = newTexture(screenW(), screenH())
+-textureSetBlendMode(gvLightScreen, bm_sub)
++textureSetBlendMode(gvLightScreen, bm_mod)
+ 
+ //Set up window
+ setWindowTitle("SuperTux Advance")

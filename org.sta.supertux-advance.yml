@@ -10,28 +10,29 @@ finish-args:
   #- --socket=wayland
   #- --socket=fallback-x11
   - --socket=pulseaudio
-  - --filesystem=home
+  - --filesystem=~/.local/share/supertux-advance:create
 modules:
   - name: supertux-advance
     buildsystem: simple
     build-commands:
-      - install -D brux /app/bin/brux
+      - install -D tmp-brux-exec /app/bin/brux
       - install -D runner.sh /app/bin/runner.sh
       - mv sta /app/bin/ && rm -r /app/bin/sta/contrib/azzy
       - echo $PWD
       - install -D $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml
       - install -D $FLATPAK_ID.desktop /app/share/applications/$FLATPAK_ID.desktop
       - install -D $FLATPAK_ID.svg /app/share/icons/hicolor/scalable/apps/$FLATPAK_ID.svg
-      - cd /app/bin/sta && git apply /run/build/supertux-advance/0.2.0-IO.diff
+      - cd /app/bin/sta && git apply /run/build/supertux-advance/0.2.1-InvertFix-PhysicsFS-Backport.diff
     no-autogen: true
     sources:
       - type: archive
         url: https://github.com/KelvinShadewing/supertux-advance/archive/refs/tags/0.2.0.tar.gz
         sha256: 54ec98cfa37adc972e099cf7a143af84958e4b120a1d3173cc417094a4c430d0
         dest: sta/
-      - type: archive
-        url: https://github.com/KelvinShadewing/brux-gdk/releases/download/v0.2.11/brux-gdk-0.2.11.zip
-        sha256: db3d5faf783b330b6f344a4ae948cb10016aaf225eeaadaf403544eed6635676
+        # Disabled because we need PhysFS.
+#      - type: archive
+#        url: https://github.com/KelvinShadewing/brux-gdk/releases/download/v0.2.11/brux-gdk-0.2.11.zip
+#        sha256: db3d5faf783b330b6f344a4ae948cb10016aaf225eeaadaf403544eed6635676
       - type: file
         path: org.sta.supertux-advance.appdata.xml
       - type: file
@@ -41,9 +42,12 @@ modules:
       - type: file
         path: runner.sh
       - type: file
-        path: patches/0.2.0-IO.diff
+        path: patches/0.2.1-InvertFix-PhysicsFS-Backport.diff
+      - type: file
+        path: tmp-brux-exec
   - modules/SDL2.json
   - modules/SDL2_gfx.json
   - modules/SDL2_image.json
   - modules/SDL2_mixer.json
   - modules/SDL2_net.json
+  - modules/PhysFS.json
