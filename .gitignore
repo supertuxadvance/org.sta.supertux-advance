@@ -1,5 +1,7 @@
 # Directories
-.flatpak-builder
-build
+.flatpak-builder/
+build/
+repo
+
 # Files
 log.txt

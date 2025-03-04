@@ -1,1 +1,0 @@
-# Flatpak for SuperTux Advance

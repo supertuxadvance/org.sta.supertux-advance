@@ -1,0 +1,5 @@
+= Flatpak for SuperTux Advance
+
+== Dependencies
+* Flatpak Builder
+* Flatpak Runtime "org.freedesktop.Platform" 24.08 and SDK

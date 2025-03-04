@@ -1,61 +1,68 @@
 app-id: org.sta.supertux-advance
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
 command: runner.sh
 finish-args:
-  - --device=dri
-  - --share=ipc
-  - --socket=x11
-  #- --socket=wayland
-  #- --socket=fallback-x11
-  - --socket=pulseaudio
-  - --filesystem=~/.local/share/supertux-advance:rw
-  - --persist=~/.local/share/supertux-advance
+    - --device=dri
+    - --share=ipc
+    - --socket=wayland
+    - --socket=fallback-x11
+    - --socket=pulseaudio
 modules:
-  - name: supertux-advance
-    buildsystem: simple
-    build-commands:
-      - install -D tmp-brux-exec /app/bin/brux
-      - install -D runner.sh /app/bin/runner.sh
-      - mv sta /app/bin/
-      - install -D $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml
-      - install -D $FLATPAK_ID.desktop /app/share/applications/$FLATPAK_ID.desktop
-      - install -D $FLATPAK_ID.svg /app/share/icons/hicolor/scalable/apps/$FLATPAK_ID.svg
-      #- cd /app/bin/sta && git apply /run/build/supertux-advance/0.2.1-InvertFix-PhysicsFS-Backport.diff
-      #- cd /app/bin/sta && git apply /run/build/supertux-advance/trigger-line-edit.diff
-    no-autogen: true
-    sources:
-#      - type: archive
-#        url: https://github.com/KelvinShadewing/supertux-advance/archive/refs/tags/0.2.0.tar.gz
-#        sha256: 54ec98cfa37adc972e099cf7a143af84958e4b120a1d3173cc417094a4c430d0
-#        dest: sta/
-        # Disabled because we need PhysFS.
-#      - type: archive
-#        url: https://github.com/KelvinShadewing/brux-gdk/releases/download/v0.2.11/brux-gdk-0.2.11.zip
-#        sha256: db3d5faf783b330b6f344a4ae948cb10016aaf225eeaadaf403544eed6635676
-      - type: git
-        url: https://github.com/KelvinShadewing/supertux-advance.git
-        dest: sta
-        branch: unstable
-        disable-fsckobjects: true
-      - type: file
-        path: org.sta.supertux-advance.appdata.xml
-      - type: file
-        path: org.sta.supertux-advance.desktop
-      - type: file
-        path: org.sta.supertux-advance.svg
-      - type: file
-        path: runner.sh
-      - type: file
-        path: patches/0.2.1-InvertFix-PhysicsFS-Backport.diff
-      - type: file
-        path: patches/trigger-line-edit.diff
-      - type: file
-        path: tmp-brux-exec
-  - modules/SDL2.json
-  - modules/SDL2_gfx.json
-  - modules/SDL2_image.json
-  - modules/SDL2_mixer.json
-  - modules/SDL2_net.json
-  - modules/PhysFS.json
+    - modules/SDL2.json
+    - modules/SDL2_gfx.json
+    - modules/SDL2_image.json
+    - modules/SDL2_mixer.json
+    - modules/SDL2_net.json
+    - modules/SDL2_ttf.json
+    - modules/PhysFS.json
+    - name: brux
+      buildsystem: simple
+      sources:
+          - type: git
+            url: https://codeberg.org/KelvinShadewing/brux-gdk
+            branch: main
+            disable-fsckobjects: true
+      config-opts:
+          - -DBUILD_STATIC_LIBS=OFF
+          - -DCMAKE_BUILD_TYPE=Release
+      # HACK: cd to rte before all cmake usage
+      build-commands:
+          - git submodule update --init --recursive # Initialize and update submodules
+          - cd rte && cmake -DCMAKE_INSTALL_PREFIX=/app -DBUILD_STATIC_LIBS=OFF -DCMAKE_BUILD_TYPE=Release .
+          - cd rte && cmake --build .
+          - cd rte && cmake --install .
+          - cd rte && install -D brux /app/bin
+    - name: supertux-advance
+      buildsystem: simple
+      build-commands:
+          - install -D runner.sh /app/bin/runner.sh
+          - mkdir /app/bin/sta && cp -r * /app/bin/sta/
+          - install -D $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml
+          - install -D $FLATPAK_ID.desktop /app/share/applications/$FLATPAK_ID.desktop
+          - install -D $FLATPAK_ID.svg /app/share/icons/hicolor/scalable/apps/$FLATPAK_ID.svg
+          #- cd /app/bin/sta && git apply /run/build/supertux-advance/0.2.1-InvertFix-PhysicsFS-Backport.diff
+          #- cd /app/bin/sta && git apply /run/build/supertux-advance/trigger-line-edit.diff
+      no-autogen: true
+      sources:
+          #      - type: archive
+          #        url: https://github.com/KelvinShadewing/supertux-advance/archive/refs/tags/0.2.0.tar.gz
+          #        sha256: 54ec98cfa37adc972e099cf7a143af84958e4b120a1d3173cc417094a4c430d0
+          #        dest: sta/
+          # Disabled because we need PhysFS.
+          #      - type: archive
+          #        url: https://github.com/KelvinShadewing/brux-gdk/releases/download/v0.2.11/brux-gdk-0.2.11.zip
+          #        sha256: db3d5faf783b330b6f344a4ae948cb10016aaf225eeaadaf403544eed6635676
+          - type: git
+            url: https://codeberg.org/KelvinShadewing/supertux-advance
+            branch: main
+            disable-fsckobjects: true
+          - type: file
+            path: org.sta.supertux-advance.appdata.xml
+          - type: file
+            path: org.sta.supertux-advance.desktop
+          - type: file
+            path: org.sta.supertux-advance.svg
+          - type: file
+            path: runner.sh
