@@ -19,11 +19,11 @@
 		<binary>SuperTux Advance</binary>
 	</provides>
 	<url type="homepage">https://supertuxadvance.github.io</url>
-	<url type="bugtracker">https://github.com/KelvinShadewing/supertux-advance/issues</url>
+	<url type="bugtracker">https:/codeberg.org/KelvinShadewing/supertux-advance/issues</url>
 	<url type="donation">https://ko-fi.com/KelvinShadewing</url>
 	<screenshots>
 		<screenshot type="default">
-			<caption>Fort Borealis, the last level of the Aurora Isles</caption>
+			<caption>Penny fighting the Yeti at Fort Borealis, the last level of the Aurora Isles</caption>
 			<image>https://supertuxadvance.github.io/images/screenshots/6.png</image>
 		</screenshot>
 		<screenshot>
@@ -31,35 +31,48 @@
 			<image>https://supertuxadvance.github.io/images/screenshots/1.png</image>
 		</screenshot>
 		<screenshot>
-			<caption>Dialogue box</caption>
+			<caption>Penny listening to some words of wisdom at a Dialogue Box</caption>
 			<image>https://supertuxadvance.github.io/images/screenshots/2.png</image>
 		</screenshot>
 		<screenshot>
-			<caption>Tux sliding into snowballs</caption>
+			<caption>Penny sliding into snowballs</caption>
 			<image>https://supertuxadvance.github.io/images/screenshots/3.png</image>
 		</screenshot>
 		<screenshot>
-			<caption>Tux on the World Map (Aurora Isles)</caption>
+			<caption>Lutris on the World Map (Aurora Isles)</caption>
 			<image>https://supertuxadvance.github.io/images/screenshots/4.png</image>
 		</screenshot>
 		<screenshot>
-			<caption>Tux swimming</caption>
+			<caption>Tux swimming through some flooded crystal caves</caption>
 			<image>https://supertuxadvance.github.io/images/screenshots/5.png</image>
 		</screenshot>
 		<screenshot>
-			<caption>Tux relaxing at a cafe</caption>
+			<caption>Midi screeching to a halt at a coffee shop</caption>
 			<image>https://supertuxadvance.github.io/images/screenshots/7.png</image>
 		</screenshot>
 		<screenshot>
-			<caption>Katie (KDE) with an Air Flower on a beach</caption>
-			<image>https://supertuxadvance.github.io/images/screenshots/fl-3.png</image>
+			<caption>Midi dashing through a forest whilst an owl approachs with a bomb in tow</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/8.png</image>
 		</screenshot>
 		<screenshot>
-			<caption>Katie (KDE) with a Fire Flower jumping over spikes</caption>
+			<caption>Midi in a beehive next to a poison lake</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/9.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Katie dashing through some ice blocks</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/fl-1.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Katie jumping through some spikey ruins</caption>
 			<image>https://supertuxadvance.github.io/images/screenshots/fl-2.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Katie on a small rock on the beach</caption>
+			<image>https://supertuxadvance.github.io/images/screenshots/fl-3.png</image>
 		</screenshot>
 	</screenshots>
 	<releases>
+		<release version="0.2.4" date="2025-02-28"/>
 		<release version="0.2.0" date="2022-10-28"/>
 		<release version="0.1.0" date="2022-04-09"/>
 	</releases>

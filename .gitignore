@@ -1,7 +1,9 @@
 # Directories
 .flatpak-builder/
 build/
-repo
+export/
+repo/
 
 # Files
 log.txt
+sta.flatpak
