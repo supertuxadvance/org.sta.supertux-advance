@@ -1,0 +1,13 @@
+{
+	"name": "LibGit2",
+	"buildsystem": "cmake-ninja",
+	"config-opts": ["-DCMAKE_BUILD_TYPE=Release"],
+	"sources": [
+		{
+			"type": "archive",
+			"url": "https://github.com/libgit2/libgit2/archive/refs/tags/v1.9.1.tar.gz",
+			"sha256": "14cab3014b2b7ad75970ff4548e83615f74d719afe00aa479b4a889c1e13fc00"
+		}
+	],
+	"cleanup": ["/lib/*.a", "/lib/*.la"]
+}

@@ -1,12 +1,12 @@
 {
 	"name": "SDL2_image",
 	"buildsystem": "autotools",
-	"config-opts": [],
+	"build-options": ["CFLAGS=-O3"],
 	"sources": [
 		{
 			"type": "archive",
-			"url": "https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.5/SDL2_image-2.8.5.tar.gz",
-			"sha256": "8bc4c57f41e2c0db7f9b749b253ef6cecdc6f0b689ecbe36ee97b50115fff645"
+			"url": "https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.8/SDL2_image-2.8.8.tar.gz",
+			"sha256": "2213b56fdaff2220d0e38c8e420cbe1a83c87374190cba8c70af2156097ce30a"
 		}
 	],
 	"cleanup": ["/lib/libSDL2_image.la", "/include/SDL_image.h"]

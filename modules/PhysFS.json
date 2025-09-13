@@ -1,7 +1,7 @@
 {
-  "name": "PhysicsFS",
-  "buildsystem": "cmake",
-  "config-opts": ["-DPHYSFS_BUILD_STATIC=FALSE", "-DPHYSFS_BUILD_TEST=FALSE", "-DPHYSFS_BUILD_DOCS=FALSE", "-DPHYSFS_DISABLE_INSTALL=OFF"],
+  "name": "PhysFS",
+  "buildsystem": "cmake-ninja",
+  "config-opts": ["-DPHYSFS_BUILD_STATIC=FALSE", "-DPHYSFS_BUILD_TEST=FALSE", "-DPHYSFS_BUILD_DOCS=FALSE", "-DPHYSFS_DISABLE_INSTALL=OFF", "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"],
   "sources": [
     {
       "type": "archive",

@@ -1,7 +1,7 @@
 {
 	"name": "SDL2_gfx",
 	"buildsystem": "autotools",
-	"config-opts": [],
+	"build-options": ["CFLAGS=-O3"],
 	"sources": [
 		{
 			"type": "archive",
