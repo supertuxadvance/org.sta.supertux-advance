@@ -24,12 +24,14 @@ modules:
     buildsystem: meson
     subdir: rte
     config-opts:
-      - --buildtype=release
+      - -Dbuildtype=release
     sources:
       - type: git
         url: https://codeberg.org/KelvinShadewing/brux-gdk
         branch: main
         disable-fsckobjects: true
+    post-install:
+      - mv /app/brux /app/bin/brux
   - name: supertux-advance
     buildsystem: simple
     build-commands:
